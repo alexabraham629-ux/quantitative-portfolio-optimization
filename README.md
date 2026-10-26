@@ -1,32 +1,49 @@
-# quantitative-portfolio-optimization
-Financial modeling pipeline computing CAPM, Beta, and Sharpe/Treynor ratios to optimize a multi-asset equity portfolio.
-# Quantitative Portfolio Optimization & CAPM Analysis
+# Portfolio Optimisation & CAPM Analysis: HDFC Bank, TCS, Reliance
 
-## 📌 Business Challenge
-Investment decisions frequently over-index on historical returns while ignoring systematic risk and volatility. A purely return-focused strategy can destroy risk-adjusted value[cite: 182]. This project architects a mathematical framework to evaluate risk-return trade-offs and optimize capital allocation across a multi-asset portfolio.
+A Python risk–return analysis of three large Indian stocks against the NIFTY 50, ending in an evidence-based ₹10 lakh allocation. Every result is cross-checked against an independent Excel model.
 
-## 🎯 Project Objective
-To conduct a comprehensive risk-return analysis of three major Indian equities (HDFC Bank, TCS, Reliance Industries) against the NIFTY 50 benchmark over a 60-month horizon (Jan 2021 – Dec 2025)[cite: 181]. The analysis culminates in an evidence-based ₹10,00,000 investment allocation[cite: 183].
+## Business challenge
+Investors often chase past returns and ignore volatility and market risk. The aim is to compare the three stocks on a risk-adjusted basis and build a better portfolio than a naive equal split.
 
-## ⚙️ Analytical Methodology & Tech Stack
-* **Languages & Libraries:** Python, Pandas, NumPy, Matplotlib
-* **Financial Modeling:** Calculated Annualized Risk (Standard Deviation), Beta, Covariance, Pearson Correlation, and the Capital Asset Pricing Model (CAPM) required rate of return[cite: 184].
-* **Performance Metrics:** Evaluated risk-adjusted performance using the **Sharpe Ratio** and **Treynor Ratio**[cite: 184].
-* **Cross-Validation:** Replicated and validated all programmatic Python outputs against native Microsoft Excel financial models to ensure formulaic integrity[cite: 182].
+## Data
+60 monthly closing prices (Jan 2021 – Dec 2025) for HDFC Bank, TCS, Reliance Industries and the NIFTY 50, in `data/`.
 
-## 📊 Key Findings
-* **The Risk-Return Disconnect:** TCS carried the highest annualized risk (21.18%) but yielded the lowest return (2.87%), resulting in a negative Sharpe Ratio (-0.1479) and proving that risk alone does not guarantee reward[cite: 185, 187].
-* **Strongest Risk-Adjusted Asset:** Reliance Industries acted as the primary alpha generator, delivering the highest Sharpe Ratio (0.3711) and Treynor Ratio (6.49%) alongside a 13.49% annualized return[cite: 185].
-* **Portfolio Optimization:** Compared a naive equal-weighted portfolio (Portfolio A) against an evidence-based allocation (Portfolio B). By minimizing exposure to risk-inefficient assets, Portfolio B generated a significantly higher Expected Return (10.59% vs 8.38%) and nearly doubled the Sharpe Ratio (0.2995 vs 0.1622) for a marginal 0.67 pp increase in absolute risk.
+## Method
+- Monthly returns, annualised return and risk (standard deviation)
+- Covariance, Pearson correlation and **beta** against the NIFTY 50
+- **CAPM** required return, **Sharpe** and **Treynor** ratios (risk-free rate 6%)
+- Equal-weight portfolio (A) versus an evidence-based allocation (B)
+- **Excel cross-validation:** every Python metric is reproduced in `reports/excel_validation_model.xlsx` (sheet *Excel Vs Python*).
 
-## 💡 Strategic Allocation
-For a moderately risk-averse investor over a 5-year horizon, the recommended ₹10,00,000 allocation is:
-* **40% HDFC Bank (₹4,00,000):** Defensive anchor (Lowest Risk: 16.97%, Beta: 0.89)[cite: 185, 197].
-* **50% Reliance Industries (₹5,00,000):** Core growth engine (Highest Sharpe)[cite: 197].
-* **10% TCS (₹1,00,000):** Minimal weighting retained strictly for correlation diversification[cite: 198].
+## Key findings
+- **Risk without reward:** TCS had the highest risk (21.18%) but the lowest return (2.87%), giving a negative Sharpe ratio (−0.148).
+- **Best risk-adjusted stock:** Reliance had the highest Sharpe (0.371) and Treynor (6.49%) ratios, with a 13.49% annualised return.
+- **Better portfolio:** Portfolio B raised expected return from 8.38% to 10.59% and nearly doubled the Sharpe ratio (0.162 → 0.300) for only 0.67 pp more risk.
 
-## 📁 Repository Contents
-* `portfolio_optimization.ipynb`: Python pipeline for covariance matrix calculation and portfolio metric generation.
-* `CIA_2_FRA_SPREADSHEET (1).xlsx`: Excel-based financial model validating the programmatic CAPM and Sharpe calculations.
-* `CIA_2_FRA_REPORT_ (1).pdf`: Executive summary detailing the investment thesis and mathematical trade-offs[cite: 176].
-* `Datasets/`: 60-month historical closing prices for HDFC, TCS, Reliance, and NIFTY 50.
+## Recommended ₹10 lakh allocation (moderately risk-averse, 5-year horizon)
+| Stock | Weight | Amount | Role |
+|---|---|---|---|
+| Reliance Industries | 50% | ₹5,00,000 | Growth engine (highest Sharpe) |
+| HDFC Bank | 40% | ₹4,00,000 | Defensive anchor (lowest risk 16.97%, beta 0.89) |
+| TCS | 10% | ₹1,00,000 | Kept for diversification |
+
+*Coursework analysis on historical data; not investment advice.*
+
+## Repository structure
+```
+├── portfolio_optimization.ipynb        # Full analysis with outputs
+├── data/                               # Monthly prices: HDFC, TCS, RELIANCE, NIFTY50
+└── reports/
+    ├── report.pdf                      # Written report
+    └── excel_validation_model.xlsx     # Excel model used to validate the Python results
+```
+
+## How to run
+```bash
+pip install -r requirements.txt
+jupyter notebook portfolio_optimization.ipynb
+```
+Run from the repository root. A clean re-run reproduces every number in the notebook exactly.
+
+## Tech stack
+Python · pandas · NumPy · Matplotlib · Microsoft Excel
